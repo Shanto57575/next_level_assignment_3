@@ -19,7 +19,8 @@ const connectDB = async () => {
   }
 };
 
+connectDB();
+
 app.listen(PORT, () => {
-  connectDB();
   console.log(`SERVER IS RUNNING ON PORT : ${PORT}`);
 });

@@ -26,7 +26,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("Database connection error", error);
     }
 });
-app_1.default.listen("/", () => {
-    connectDB();
+connectDB();
+app_1.default.listen(PORT, () => {
     console.log(`SERVER IS RUNNING ON PORT : ${PORT}`);
 });

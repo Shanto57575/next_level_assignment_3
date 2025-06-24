@@ -19,14 +19,18 @@ dotenv_1.default.config();
 const PORT = process.env.PORT || 3001;
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const dbConnection = yield mongoose_1.default.connect(process.env.MONGODB_URL);
+        const dbConnection = yield mongoose_1.default.connect(process.env.MONGODB_URL, {
+            serverSelectionTimeoutMS: 30000,
+            connectTimeoutMS: 30000,
+        });
         console.log(`MONGODB CONNECTED!!! CONNECTION HOST: ${dbConnection.connection.host}`);
+        app_1.default.listen(PORT, () => {
+            console.log(`SERVER IS RUNNING ON PORT : ${PORT}`);
+        });
     }
     catch (error) {
-        console.log("Database connection error", error);
+        console.error("❌ Database connection error", error);
+        process.exit(1);
     }
 });
 connectDB();
-app_1.default.listen(PORT, () => {
-    console.log(`SERVER IS RUNNING ON PORT : ${PORT}`);
-});
